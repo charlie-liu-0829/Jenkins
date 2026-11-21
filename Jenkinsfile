@@ -1,6 +1,7 @@
 pipeline{
     agent any
     environment {
+        DB_USER = 'root'
         DB_PASSWORD = credentials('mysql-test-password')
     }
 
