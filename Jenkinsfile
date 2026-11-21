@@ -4,10 +4,10 @@ pipeline{
         DB_HOST = '127.0.0.1'
         DB_PORT = '3306'
         DB_USER = 'root'
-        DB_PASSWORD = ' Lym030829'
+        DB_PASSWORD = 'Lym030829'
         DB_NAME = 'ecommerce_demo'
     }
-    
+
     stages{
         stage("auto_get_code"){
             steps{
