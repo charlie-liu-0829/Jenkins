@@ -28,7 +28,7 @@ pipeline{
               <h1>total cases: ${TEST_COUNTS,var="total"} <h1>
               <h1>pass cases: ${TEST_COUNTS,var="pass" <h1>
               <h1>fail cases: ${TEST_COUNTS,var="fail" <h1>
-            </html>''', subject: '自动化测试脚本运行结果通知', to: 'yuemengliu0829@outlook.com'
+            </html>''', subject: '自动化测试脚本运行结果通知', to: '18600988847@163.com'
           }
     }
 
