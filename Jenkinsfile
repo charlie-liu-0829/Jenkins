@@ -7,6 +7,7 @@ pipeline{
         DB_PASSWORD = ' Lym030829'
         DB_NAME = 'ecommerce_demo'
     }
+    
     stages{
         stage("auto_get_code"){
             steps{
