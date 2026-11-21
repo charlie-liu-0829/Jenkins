@@ -1,0 +1,25 @@
+ids:
+  - 上架商品成功
+  - 商品不存在，上架失败
+cases:
+  - feature: 商品模块
+    story: 上架商品
+    title: 上架成功
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/admin/products/117/on-sale
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 商品模块
+    story: 上架商品
+    title: 商品不存在
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/admin/products/25000/on-sale
+    expected:
+      status_code: 404
+      code: 12007
+      msg: 商品不存在

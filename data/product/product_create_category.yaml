@@ -1,0 +1,50 @@
+ids:
+  - 添加商品分类成功
+  - 添加失败，分类名称已存在
+  - 添加失败，父分类不存在
+
+cases:
+  - feature: 商品模块
+    story: 添加商品分类
+    title: 添加成功
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/admin/categories
+      json:
+        "name": "手机"
+        "parentId": 1
+        "sort": 0
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 商品模块
+    story: 添加商品分类
+    title: 分类名称已存在
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/admin/categories
+      json:
+        "name": "智能家居"
+        "parentId": 2
+        "sort": 3
+    expected:
+      status_code: 400
+      code: 12001
+      msg: 分类名称已存在
+
+  - feature: 商品模块
+    story: 添加商品分类
+    title: 父分类不存在
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/admin/categories
+      json:
+        "name": "游戏机"
+        "parentId": 2000
+        "sort": 0
+    expected:
+      status_code: 400
+      code: 12002
+      msg: 父分类不存在

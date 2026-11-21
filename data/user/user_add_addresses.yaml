@@ -1,0 +1,22 @@
+ids:
+  - 添加收货地址成功
+
+cases:
+  - feature: 用户模块
+    story: 添加收货地址
+    title: 添加成功
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/users/addresses
+      json:
+        "receiverName": "李四"
+        "receiverPhone": "13987654321"
+        "province": "北京市"
+        "city": "北京市"
+        "district": "朝阳区"
+        "detail": "建国路88号"
+        "isDefault": false
+    expected:
+      status_code: 200
+      code: 0
+      msg: success

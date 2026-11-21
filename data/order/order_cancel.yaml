@@ -1,0 +1,45 @@
+ids:
+  - 取消订单成功
+  - 取消失败，订单不存在
+  - 取消失败，无权限操作该订单
+
+
+cases:
+  - feature: 订单模块
+    story: 取消订单
+    title: 取消订单成功
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/orders/10/cancel
+      json:
+          "cancelReason": "不想要了"
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 订单模块
+    story: 取消订单
+    title: 订单不存在
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/orders/25000/cancel
+      json:
+          "cancelReason": "不想要了"
+    expected:
+      status_code: 404
+      code: 15006
+      msg: 订单不存在
+
+  - feature: 订单模块
+    story: 取消订单
+    title: 无权限操作该订单
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/orders/6/cancel
+      json:
+          "cancelReason": "不想要了"
+    expected:
+      status_code: 403
+      code: 15007
+      msg: 无权限操作该订单

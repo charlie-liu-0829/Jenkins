@@ -1,0 +1,14 @@
+ids:
+  - 查询库存变更日志成功
+
+cases:
+  - feature: 库存模块
+    story: 查询库存变更日志成功
+    title: 查询成功
+    request:
+      method: GET
+      url: ${API_BASE_URL}/api/admin/inventory/101/logs
+    expected:
+      status_code: 200
+      code: 0
+      msg: success

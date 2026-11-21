@@ -1,0 +1,36 @@
+ids:
+  - 创建订单成功
+#  - 创建失败，收货地址不存在
+#  - 创建失败，无权限使用该收货地址
+#  - 创建失败，商品[iPhone 15]已下架或不存在
+#  - 创建失败，商品[iPhone 15]库存不足
+
+
+cases:
+  - feature: 订单模块
+    story: 创建订单
+    title: 创建订单成功
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/orders
+      json:
+        "productIds": [101]
+        "addressId": 9
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+
+#  - feature: 订单模块
+#    story: 创建订单
+#    title: 请至少选择一件商品
+#    request:
+#      method: POST
+#      url: ${API_BASE_URL}/api/orders
+#      json:
+#        "productIds": [101]
+#        "addressId": 0
+#    expected:
+#      code: 15001
+#      msg: 请至少选择一件商品

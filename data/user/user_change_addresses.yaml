@@ -1,0 +1,21 @@
+ids:
+  - 修改收货地址成功
+
+cases:
+  - feature: 用户模块
+    story: 修改收货地址信息
+    title: 修改成功
+    request:
+      method: PUT
+      json:
+        "receiverName": "李四"
+        "receiverPhone": "13987654321"
+        "province": "北京市"
+        "city": "北京市"
+        "district": "西城区"
+        "detail": "建国路1000号"
+        "isDefault": false
+    expected:
+      status_code: 200
+      code: 0
+      msg: success

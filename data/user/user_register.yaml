@@ -1,0 +1,105 @@
+ids:
+  - 注册成功
+  - 使用已注册的手机号进行注册，注册失败
+  - 两次输入的密码不一致，注册失败
+  - 密码位数小于8位，注册失败
+  - 密码位数大于20位，注册失败
+  - 密码出现特殊字符，注册失败
+
+
+cases:
+  - feature: 用户模块
+    story: 用户注册
+    title: 注册成功
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/users/register
+      json:
+        phone: "13812345678"
+        password: "Pass1234"
+        confirmPassword: "Pass1234"
+        username: "张三"
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 用户模块
+    story: 用户注册
+    title: 使用已注册的手机号进行注册
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/users/register
+      json:
+        phone: "13912345678"
+        password: "Pass1234"
+        confirmPassword: "Pass1234"
+        username: "李四"
+    expected:
+      status_code: 400
+      code: 11002
+      msg: 该手机号已注册
+
+  - feature: 用户模块
+    story: 用户注册
+    title: 两次输入的密码不一致
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/users/register
+      json:
+        phone: "13912354678"
+        password: "Pass1234"
+        confirmPassword: "Pass12345"
+        username: "李四"
+    expected:
+      status_code: 400
+      code: 11004
+      msg: 两次输入的密码不一致
+
+  - feature: 用户模块
+    story: 用户注册
+    title: 密码位数小于8位
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/users/register
+      json:
+        phone: "13912354678"
+        password: "Pass"
+        confirmPassword: "Pass"
+        username: "李四"
+    expected:
+      status_code: 400
+      code: 11003
+      msg: 密码须为8-20位字母数字组合
+
+  - feature: 用户模块
+    story: 用户注册
+    title: 密码位数大于20位
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/users/register
+      json:
+        phone: "13912354678"
+        password: "Pass1234567891011121314"
+        confirmPassword: "Pass1234567891011121314"
+        username: "李四"
+    expected:
+      status_code: 400
+      code: 11003
+      msg: 密码须为8-20位字母数字组合
+
+  - feature: 用户模块
+    story: 用户注册
+    title: 密码出现特殊字符
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/users/register
+      json:
+        phone: "13912354678"
+        password: "@#Pass1234??!!"
+        confirmPassword: "@#Pass1234??!!"
+        username: "李四"
+    expected:
+      status_code: 400
+      code: 11003
+      msg: 密码须为8-20位字母数字组合

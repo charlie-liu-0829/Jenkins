@@ -1,0 +1,14 @@
+ids:
+  - 查询商品成功
+
+cases:
+  - feature: 购物车模块
+    story: 查询商品
+    title: 查询成功
+    request:
+      method: GET
+      url: ${API_BASE_URL}/api/cart
+    expected:
+      status_code: 200
+      code: 0
+      msg: success

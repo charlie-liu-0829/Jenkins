@@ -1,0 +1,13 @@
+ids:
+  - 删除收货地址
+
+cases:
+  - feature: 用户模块
+    story: 删除收货地址
+    title: 删除成功
+    request:
+      method: DELETE
+    expected:
+      status_code: 200
+      code: 0
+      msg: success

@@ -1,0 +1,14 @@
+ids:
+  - 获取商品分类成功
+
+cases:
+  - feature: 商品模块
+    story: 获取商品分类
+    title: 获取成功
+    request:
+      method: GET
+      url: ${API_BASE_URL}/api/categories/tree
+    expected:
+      status_code: 200
+      code: 0
+      msg: success

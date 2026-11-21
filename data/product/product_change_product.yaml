@@ -1,0 +1,53 @@
+ids:
+  - 修改商品成功
+  - 商品不存在，修改失败
+  - 已上架商品不允许修改价格，修改失败
+
+cases:
+  - feature: 商品模块
+    story: 修改商品
+    title: 修改成功
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/admin/products/116
+      json:
+        "categoryId": 14
+        "name": "Speaker two"
+        "description": "家用 360° 音响 / 5单元阵列 · 90W · 蓝牙5.3+AirPlay 2+有线"
+        "price": 2599.00
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 商品模块
+    story: 修改商品
+    title: 商品不存在
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/admin/products/25000
+      json:
+        "categoryId": 14
+        "name": "Speaker One"
+        "description": "家用 360° 音响 / 5单元阵列 · 90W · 蓝牙5.3+AirPlay 2+有线"
+        "price": 18999.00
+    expected:
+      status_code: 404
+      code: 12007
+      msg: 商品不存在
+
+  - feature: 商品模块
+    story: 修改商品
+    title: 已上架商品不允许修改价格
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/admin/products/116
+      json:
+        "categoryId": 14
+        "name": "Speaker One"
+        "description": "家用 360° 音响 / 5单元阵列 · 90W · 蓝牙5.3+AirPlay 2+有线"
+        "price": 18999.00
+    expected:
+      status_code: 400
+      code: 12008
+      msg: 已上架商品不允许修改价格

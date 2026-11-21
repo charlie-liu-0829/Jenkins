@@ -1,0 +1,36 @@
+ids:
+  - 创建商品成功
+  - 分类不存在，创建失败
+
+cases:
+  - feature: 商品模块
+    story: 创建商品
+    title: 创建成功
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/admin/products
+      json:
+        "categoryId": 12
+        "name": "MacbookPro 2026  触摸屏"
+        "description": "32+1TB"
+        "price": 15999.00
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 商品模块
+    story: 创建商品
+    title: 分类不存在
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/admin/products
+      json:
+        "categoryId": 300
+        "name": "iPhone 15"
+        "description": "Apple iPhone 15 128GB"
+        "price": 5999.00
+    expected:
+      status_code: 404
+      code: 12003
+      msg: 分类不存在

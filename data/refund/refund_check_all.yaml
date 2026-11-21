@@ -1,0 +1,14 @@
+ids:
+  - 查询全部退款信息成功
+
+cases:
+  - feature: 退款模块
+    story: 查询全部退款信息
+    title: 查询成功
+    request:
+      method: GET
+      url: ${API_BASE_URL}/api/admin/refunds
+    expected:
+      status_code: 200
+      code: 0
+      msg: success

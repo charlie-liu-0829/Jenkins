@@ -1,0 +1,26 @@
+ids:
+  - 审核退款成功
+  - 审核失败，退款申请不存在
+
+cases:
+  - feature: 退款模块
+    story: 退款审核
+    title: 审核成功
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/admin/refunds/16/approve
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 退款模块
+    story: 退款审核
+    title: 退款申请不存在
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/admin/refunds/25000/approve
+    expected:
+      status_code: 404
+      code: 16003
+      msg: 退款申请不存在

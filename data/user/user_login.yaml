@@ -1,0 +1,48 @@
+ids:
+  - 登录成功
+  - 账号错误，登录失败
+  - 密码错误，登录失败
+
+
+cases:
+  - feature: 用户模块
+    story: 用户登录
+    title: 登录成功
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/users/login
+      json:
+        phone: "${TEST_USER_PHONE}"
+        password: "${TEST_USER_PASSWORD}"
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 用户模块
+    story: 用户登录
+    title: 账号错误
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/users/login
+      json:
+        phone: "13900001111"
+        password: "${TEST_USER_PASSWORD}"
+    expected:
+      status_code: 401
+      code: 11005
+      msg: 账号或密码错误
+
+  - feature: 用户模块
+    story: 用户登录
+    title: 密码错误
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/users/login
+      json:
+        phone: "${TEST_USER_PHONE}"
+        password: "Test12"
+    expected:
+      status_code: 401
+      code: 11005
+      msg: 账号或密码错误

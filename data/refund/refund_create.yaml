@@ -1,0 +1,30 @@
+ids:
+  - 申请退款成功
+  - 申请失败，订单不存在
+
+cases:
+  - feature: 退款模块
+    story: 申请退款
+    title: 申请成功
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/orders/14/refunds
+      json:
+        "reason": "商品质量问题，申请全额退款"
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 退款模块
+    story: 申请退款
+    title: 订单不存在
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/orders/25000/refunds
+      json:
+        "reason": "商品质量问题，申请全额退款"
+    expected:
+      status_code: 404
+      code: 15006
+      msg: 订单不存在

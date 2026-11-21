@@ -1,0 +1,30 @@
+ids:
+  - 驳回退款成功
+  - 驳回失败，退款单不存在
+
+cases:
+  - feature: 退款模块
+    story: 驳回申请
+    title: 驳回成功
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/admin/refunds/2/reject
+      json:
+         "rejectReason": "商品无质量问题，驳回申请"
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 退款模块
+    story: 驳回申请
+    title: 退款单不存在
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/admin/refunds/25000/reject
+      json:
+         "rejectReason": "商品无质量问题，驳回申请"
+    expected:
+      status_code: 404
+      code: 16003
+      msg: 退款单不存在

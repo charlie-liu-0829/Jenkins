@@ -1,0 +1,51 @@
+ids:
+  - 删除商品分类成功
+  - 删除失败，分类不存在
+  - 删除失败，该分类下有子分类，无法删除
+  - 删除失败，该分类下有商品，无法删除
+
+cases:
+  - feature: 商品模块
+    story: 删除商品分类
+    title: 删除成功
+    request:
+      method: DELETE
+      url: ${API_BASE_URL}/api/admin/categories/10001
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 商品模块
+    story: 删除商品分类
+    title: 分类不存在
+    request:
+      method: DELETE
+      url: ${API_BASE_URL}/api/admin/categories/25000
+    expected:
+      status_code: 404
+      code: 12003
+      msg: 分类不存在
+
+  - feature: 商品模块
+    story: 删除商品分类
+    title: 该分类下有子分类，无法删除
+    request:
+      method: DELETE
+      url: ${API_BASE_URL}/api/admin/categories/1
+    expected:
+      status_code: 400
+      code: 12004
+      msg: 该分类下有子分类，无法删除
+
+
+  - feature: 商品模块
+    story: 删除商品分类
+    title: 该分类下有商品，无法删除
+    request:
+      method: DELETE
+      url: ${API_BASE_URL}/api/admin/categories/12
+    expected:
+      status_code: 400
+      code: 12005
+      msg: 该分类下有商品，无法删除

@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+.env
+logs/*.log
+report/json_report/
+report/html_report/
+allure-report/
+.DS_Store
+.idea/

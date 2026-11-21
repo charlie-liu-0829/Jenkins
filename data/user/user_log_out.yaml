@@ -1,0 +1,14 @@
+ids:
+  - 退出登录成功
+
+cases:
+  - feature: 用户模块
+    story: 用户退出登录
+    title: 退出登录成功
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/users/logout
+    expected:
+      status_code: 200
+      code: 0
+      msg: success

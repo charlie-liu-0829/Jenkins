@@ -1,0 +1,34 @@
+ids:
+  - 新增商品图片成功
+  - 新增失败，商品不存在
+
+cases:
+  - feature: 商品模块
+    story: 新增商品图片
+    title: 新增成功
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/admin/products/117/images
+      json:
+        "url": "https://cdn.pixabay.com/photo/2021/03/27/07/08/iphone-6126432_960_720.jpg"
+        "type": "DETAIL"
+        "sort": 1
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 商品模块
+    story: 新增商品图片
+    title: 商品不存在
+    request:
+      method: POST
+      url: ${API_BASE_URL}/api/admin/products/25000/images
+      json:
+        "url": "https://cdn.pixabay.com/photo/2021/03/27/07/08/iphone-6126432_960_720.jpg"
+        "type": "DETAIL"
+        "sort": 1
+    expected:
+      status_code: 404
+      code: 12007
+      msg: 商品不存在

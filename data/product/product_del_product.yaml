@@ -1,0 +1,38 @@
+ids:
+  - 删除商品成功
+  - 删除失败，商品不存在
+  - 删除失败，请先下架商品再删除
+
+cases:
+  - feature: 商品模块
+    story: 删除商品
+    title: 删除成功
+    request:
+      method: DELETE
+      url: ${API_BASE_URL}/api/admin/products/119
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 商品模块
+    story: 删除商品
+    title: 商品不存在
+    request:
+      method: DELETE
+      url: ${API_BASE_URL}/api/admin/products/25000
+    expected:
+      status_code: 404
+      code: 12007
+      msg: 商品不存在
+
+  - feature: 商品模块
+    story: 删除商品
+    title: 请先下架商品再删除
+    request:
+      method: DELETE
+      url: ${API_BASE_URL}/api/admin/products/104
+    expected:
+      status_code: 400
+      code: 12010
+      msg: 请先下架商品再删除

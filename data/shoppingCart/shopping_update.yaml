@@ -1,0 +1,16 @@
+ids:
+  - 更新商品数量成功
+
+cases:
+  - feature: 购物车模块
+    story: 更新商品数量
+    title: 更新成功
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/cart/items/101
+      json:
+        "quantity": 5
+    expected:
+      status_code: 200
+      code: 0
+      msg: success

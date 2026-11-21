@@ -1,0 +1,26 @@
+ids:
+  - 订单确认收货成功
+  - 确认失败，订单不存在
+
+cases:
+  - feature: 订单模块
+    story: 订单确认收货
+    title: 订单确认收货成功
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/orders/13/confirm
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 订单模块
+    story: 订单确认收货
+    title: 订单不存在
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/orders/25000/confirm
+    expected:
+      status_code: 404
+      code: 15006
+      msg: 订单不存在

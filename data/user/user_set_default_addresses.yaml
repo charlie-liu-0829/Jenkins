@@ -1,0 +1,13 @@
+ids:
+  - 设置默认地址
+
+cases:
+  - feature: 用户模块
+    story: 设置默认地址
+    title: 设置成功
+    request:
+      method: PUT
+    expected:
+      status_code: 200
+      code: 0
+      msg: success

@@ -1,0 +1,14 @@
+ids:
+  - 删除商品成功
+
+cases:
+  - feature: 购物车模块
+    story: 删除商品
+    title: 删除成功
+    request:
+      method: DELETE
+      url: ${API_BASE_URL}/api/cart/items/101
+    expected:
+      status_code: 200
+      code: 0
+      msg: success

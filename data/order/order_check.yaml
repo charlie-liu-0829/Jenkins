@@ -1,0 +1,14 @@
+ids:
+  - 查询订单成功
+
+cases:
+  - feature: 订单模块
+    story: 查询订单
+    title: 查询订单成功
+    request:
+      method: GET
+      url: ${API_BASE_URL}/api/orders
+    expected:
+      status_code: 200
+      code: 0
+      msg: success

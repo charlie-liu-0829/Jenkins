@@ -1,0 +1,26 @@
+ids:
+  - 订单发货成功
+  - 发货失败，订单不存在
+
+cases:
+  - feature: 订单模块
+    story: 订单发货
+    title: 发货成功
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/admin/orders/12/ship
+    expected:
+      status_code: 200
+      code: 0
+      msg: success
+
+  - feature: 订单模块
+    story: 订单发货
+    title: 订单不存在
+    request:
+      method: PUT
+      url: ${API_BASE_URL}/api/admin/orders/25000/ship
+    expected:
+      status_code: 404
+      code: 15006
+      msg: 订单不存在
