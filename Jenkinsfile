@@ -1,5 +1,9 @@
 pipeline{
     agent any
+    environment {
+        DB_PASSWORD = credentials('mysql-test-password')
+    }
+
     stages{
         stage("auto_get_code"){
             steps{
