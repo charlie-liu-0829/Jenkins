@@ -18,54 +18,63 @@ pipeline {
                     export JAVA_HOME="/opt/homebrew/opt/openjdk@21"
                     export PATH="/Users/charlieliu/miniforge3/envs/pytest/bin:$JAVA_HOME/bin:/opt/homebrew/bin:/usr/bin:/bin"
 
-                    python --version
-                    python -m pip install -r requirements.txt
-
                     mkdir -p report
                     rm -f report/junit.xml
 
-                    python main.py --junitxml=report/junit.xml
+                    python --version
+                    python -m pip install -r requirements.txt
+                    python main.py --no-report --junitxml=report/junit.xml
                 '''
             }
         }
     }
 
-//     post {
-//         always {
-//             script {
-//                 if (fileExists('report/junit.xml')) {
-//                     junit testResults: 'report/junit.xml'
-//                 }
-//             }
-//
-//             emailext(
-//                 mimeType: 'text/html',
-//                 subject: "${env.JOB_NAME} #${env.BUILD_NUMBER}：${currentBuild.currentResult}",
-//                 to: '18600988847@163.com',
-//                 body: '''
-//                     <html>
-//                     <body>
-//                         <h2>自动化测试结果</h2>
-//                         <p>任务：${PROJECT_NAME}</p>
-//                         <p>构建：#${BUILD_NUMBER}</p>
-//                         <p>总数：${TEST_COUNTS,var="total"}</p>
-//                         <p>通过：${TEST_COUNTS,var="pass"}</p>
-//                         <p>失败：${TEST_COUNTS,var="fail"}</p>
-//                         <p>跳过：${TEST_COUNTS,var="skip"}</p>
-//                         <p><a href="${BUILD_URL}">查看构建详情</a></p>
-//                     </body>
-//                     </html>
-//                 '''
-//             )
-//         }
-//     }
-    post{
-     always{
-        allure commandline: 'allure', includeProperties: false, jdk: '', report: 'report/html_report', resultPolicy: 'LEAVE_AS_IS', results: [[path: 'report/json_report']]
-        emailext body:'''<html>
-        <h1>Allure报告地址:http://localhost:8080<h1>
-        </html>''', subject:'登录即可查看构建的Allure', to:'18600988847@163.com'
-     }
+    post {
+        always {
+            script {
+                if (fileExists('report/junit.xml')) {
+                    junit testResults: 'report/junit.xml'
+                }
+            }
 
+            allure(
+                commandline: 'allure',
+                includeProperties: false,
+                jdk: '',
+                report: 'report/html_report',
+                results: [[path: 'report/json_report']]
+            )
+
+            emailext(
+                mimeType: 'text/html',
+                subject: "${env.JOB_NAME} #${env.BUILD_NUMBER}：${currentBuild.currentResult}",
+                to: '18600988847@163.com',
+                body: """
+                    <html>
+                    <body style="font-family: Arial, sans-serif; line-height: 1.8;">
+                        <h2>自动化测试构建通知</h2>
+                        <p>任务名称：${env.JOB_NAME}</p>
+                        <p>构建编号：#${env.BUILD_NUMBER}</p>
+                        <p>构建状态：${currentBuild.currentResult}</p>
+                        <p>
+                            <a href="${env.BUILD_URL}allure/">
+                                查看本次 Allure 测试报告
+                            </a>
+                        </p>
+                        <p>
+                            <a href="${env.BUILD_URL}testReport/">
+                                查看 JUnit 测试统计
+                            </a>
+                        </p>
+                        <p>
+                            <a href="${env.BUILD_URL}">
+                                查看构建详情
+                            </a>
+                        </p>
+                    </body>
+                    </html>
+                """
+            )
+        }
     }
 }
